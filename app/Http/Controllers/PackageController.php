@@ -24,4 +24,11 @@ class PackageController extends Controller
         Package::create($data);
         return redirect()->route('menu.index');
     }
+
+    public function destroy($id) {
+        $package = Package::findOrFail($id);
+
+        $package->delete();
+        return redirect()->route('menu.index');
+    }
 }

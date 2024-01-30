@@ -18,12 +18,13 @@
         <!-- Styles -->
         @livewireStyles
     </head>
-    <body>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <body class="bg-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2">
             <div class="py-4 flex flex-row items-center justify-between">
                 <img class="w-28" src="{{ asset('logo.webp') }}" alt="">
+                <img class="w-screen h-screen object-cover bg-center absolute inset-0 z-0" src="{{ asset('images.webp') }}" alt="">
             </div>
-            <div class="font-sans text-gray-900 antialiased my-6">
+            <div class="font-sans text-gray-900 antialiased my-8 z-10 relative">
                 @yield('content')
             </div>
         </div>
