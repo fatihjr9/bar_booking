@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('time');
             $table->string('person');
             $table->text('menu');
-            $table->string('status');
+            $table->string('country');
+            $table->string('payment');
+            $table->string('affiliate');
         });
     }
 

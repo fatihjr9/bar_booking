@@ -1,0 +1,58 @@
+s
+
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Booking;
+use App\Models\Menu;
+use App\Models\Seats;
+use Illuminate\Http\Request;
+
+class BookingController extends Controller
+{
+    public function index() {
+        $booking = Booking::latest()->get();
+        return view('pages.template.order', compact('booking'));
+    }
+
+    // public function home() {
+    //     return view('client.index');
+    // }
+
+    public function home(Request $request) {
+        $uniqueDates = Seats::select('date')->distinct()->pluck('date');
+    
+        $selectedDate = $request->input('selected_date') ?? $uniqueDates->first(); // Mengatur nilai default
+    
+        $query = Seats::query();
+    
+        if ($selectedDate) {
+            $query->whereDate('date', $selectedDate);
+        }
+    
+        $seat = $query->latest()->get();
+        $menu = Menu::latest()->get();
+    
+        return view('client.index', compact('seat', 'menu', 'selectedDate', 'uniqueDates'));
+    }
+      
+    
+    public function store(Request $request) {
+        $seats = Seats::all();
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required|numeric',
+            'date' => 'required|date|after_or_equal:' . $seats->min('date') . '|before_or_equal:' . $seats->max('date'),
+            'time' => 'required',
+            'person' => 'required',
+            'menu' => 'required|array',
+            'status' => 'required',
+        ]);
+        $data['menu'] = implode(',', $data['menu']);
+
+        Booking::create($data);
+        return redirect()->route('client.success');
+    }
+}

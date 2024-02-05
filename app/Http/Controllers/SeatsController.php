@@ -11,7 +11,7 @@ class SeatsController extends Controller
         $seats = Seats::orderBy('date')->orderBy('time')->get();
 
         $grouped = $seats->groupBy(function ($item) {
-            return \Carbon\Carbon::parse($item->date)->format('l, d F Y');
+            return \Carbon\Carbon::parse($item->date)->format('D M Y');
         });
     
         return view('pages.template.seat', compact('grouped'));

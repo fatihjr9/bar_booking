@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\PackageController;
@@ -17,7 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Client
-Route::get('/', function () { return view('client.index');});
+Route::get('/', [BookingController::class, 'create'])->name('client.create');
+Route::post('/', [BookingController::class, 'store'])->name('client.store');
+Route::get('/success', function () { return view('client.success');})->name('client.success');
 Route::get('/payment', function () { return view('client.payment');});
 
 
@@ -27,7 +30,7 @@ Route::middleware([
     config('jetstream.auth_session'),
     'verified',
 ])->group(function () {
-    Route::get('/admin/index', function () { return view('pages.template.index');})->name('dashboard');
+    Route::get('/dashboard', function () { return view('pages.template.index');})->name('dashboard');
     // Menu
     Route::get('/admin/menu', [MenuController::class, 'index'])->name('menu.index');
     Route::get('/admin/menu/create', [MenuController::class, 'create'])->name('menu.create');
@@ -45,5 +48,5 @@ Route::middleware([
     Route::get('/admin/seats/create', [SeatsController::class, 'create'])->name('seats.create');
     Route::post('/admin/seats/create', [SeatsController::class, 'store'])->name('seats.store');
     // Customer-Order
-    Route::get('/admin/customer-order', function () { return view('pages.template.order');})->name('order.index');
+    Route::get('/admin/customer-order', [BookingController::class, 'index'])->name('book.index');
 });
