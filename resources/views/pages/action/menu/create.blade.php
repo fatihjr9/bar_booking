@@ -39,7 +39,7 @@
                     </div>
                     <div class="flex flex-col space-y-1">
                         <p>Category</p>
-                        <select name="category" id="">
+                        <select name="category" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg">
                             @foreach($categories as $item)
                                 <option value="{{ $item->category }}">{{ $item->category }}</option>
                             @endforeach

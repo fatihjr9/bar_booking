@@ -31,7 +31,7 @@
                     </div>
                     <div class="flex flex-col space-y-1">
                         <p>Time</p>
-                        <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg" type="number" name="time" id="">
+                        <input class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg" type="time" name="time" id="">
                     </div>
                 </section>
                 <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white transition-all py-2 rounded-lg">Add Seats</button>

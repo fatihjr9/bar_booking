@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Menu;
+use App\Models\Seats;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class BookingController extends Controller
 {
@@ -13,7 +16,8 @@ class BookingController extends Controller
     }
 
     public function create() {
-        return view('client.index');
+        $menu = Menu::latest()->get();
+        return view('client.index', compact('menu'));
     }
 
     public function store(Request $request) {

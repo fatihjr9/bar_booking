@@ -42,7 +42,8 @@
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                @foreach ($seat as $item)
+                
+                @foreach($seat as $item)
                     @if (!$selectedDate || \Carbon\Carbon::parse($item->date)->format('Y-m-d') === $selectedDate)
                     <div>
                         <input type="radio" id="{{ $item->id }}" name="job" value="{{ $item->id }}" class="hidden peer" required>
